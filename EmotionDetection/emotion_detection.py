@@ -1,11 +1,14 @@
-import requests
 import json
+import requests
 
 
 def emotion_detector(text_to_analyze):
     """Detect emotions in the supplied text using Watson NLP."""
 
-    url = "https://sn-watson-emotion.labs.skills.network/v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    url = (
+        "https://sn-watson-emotion.labs.skills.network/"
+        "v1/watson.runtime.nlp.v1/NlpService/EmotionPredict"
+    )
 
     headers = {
         "grpc-metadata-mm-model-id":
@@ -24,10 +27,19 @@ def emotion_detector(text_to_analyze):
         json=input_json
     )
 
-    # Convert the response text into a Python dictionary
+    # Error handling for blank input
+    if response.status_code == 400:
+        return {
+            "anger": None,
+            "disgust": None,
+            "fear": None,
+            "joy": None,
+            "sadness": None,
+            "dominant_emotion": None
+        }
+
     formatted_response = json.loads(response.text)
 
-    # Extract emotion scores
     emotions = formatted_response["emotionPredictions"][0]["emotion"]
 
     anger_score = emotions["anger"]
@@ -36,7 +48,6 @@ def emotion_detector(text_to_analyze):
     joy_score = emotions["joy"]
     sadness_score = emotions["sadness"]
 
-    # Find the emotion with the highest score
     emotion_scores = {
         "anger": anger_score,
         "disgust": disgust_score,
@@ -47,7 +58,6 @@ def emotion_detector(text_to_analyze):
 
     dominant_emotion = max(emotion_scores, key=emotion_scores.get)
 
-    # Return the required format
     return {
         "anger": anger_score,
         "disgust": disgust_score,
