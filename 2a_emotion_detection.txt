@@ -1,0 +1,25 @@
+import requests
+
+
+def emotion_detector(text_to_analyze):
+    """Detect emotions in the supplied text using Watson NLP."""
+
+    url = "THE_URL_IBM_GAVE_YOU"
+
+    headers = {
+        "grpc-metadata-mm-model-id": "THE_MODEL_ID_IBM_GAVE_YOU"
+    }
+
+    input_json = {
+        "raw_document": {
+            "text": text_to_analyze
+        }
+    }
+
+    response = requests.post(
+        url,
+        json=input_json,
+        headers=headers
+    )
+
+    return response.text

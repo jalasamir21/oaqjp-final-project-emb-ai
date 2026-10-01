@@ -1,0 +1,8 @@
+/home/project/final_pr
+oject$ python3
+Python 3.10.12 (main, Aug 31 2026, 10:18:17) [GCC 11.4.0] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> from emotion_detection import emotion_detector
+>>> emotion_detector("I am glad this happened")
+'{"emotionPredictions":[{"emotion":{"anger":0.01388365, "disgust":0.00850114, "fear":0.018487887, "joy":0.83237535, "sadness":0.17257097}, "target":"", "emotionMentions":[{"span":{"begin":0, "end":23, "text":"I am glad this happened"}, "emotion":{"anger":0.01388365, "disgust":0.00850114, "fear":0.018487887, "joy":0.83237535, "sadness":0.17257097}}]}], "producerId":{"name":"Ensemble Aggregated Emotion Workflow", "version":"0.0.1"}}'
+>>> 
